@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: gnana-whatsapp-rag-backend
+    runtime: python
+    region: singapore
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX_NAME
+        value: whatsapp-chatbot
+      - key: WASENDER_API_KEY
+        sync: false
+      - key: WASENDER_SESSION_NAME
+        value: Gowthami
+      - key: WASENDER_BASE_URL
+        value: https://www.wasenderapi.com
+      - key: WASENDER_WEBHOOK_SECRET
+        sync: false
